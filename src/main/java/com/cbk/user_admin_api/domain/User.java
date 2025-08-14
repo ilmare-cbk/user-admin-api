@@ -47,4 +47,8 @@ public class User {
             this.address = address;
         }
     }
+
+    public boolean matchedPassword(String password) {
+        return this.password.equals(password);
+    }
 }
