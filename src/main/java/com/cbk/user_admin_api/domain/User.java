@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.util.StringUtils;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -33,5 +34,17 @@ public class User {
         user.phoneNumber = phoneNumber;
         user.address = address;
         return user;
+    }
+
+    public void updatePassword(String password) {
+        if (StringUtils.hasText(password)) {
+            this.password = password;
+        }
+    }
+
+    public void updateAddress(String address) {
+        if (StringUtils.hasText(address)) {
+            this.address = address;
+        }
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
@@ -26,5 +27,11 @@ public class UserQueryRepositoryImpl implements UserQueryRepository {
                                        it.getPhoneNumber(),
                                        it.getAddress()))
                 .toList();
+    }
+
+    @Override
+    public Optional<User> findByUserId(String userId) {
+        return userJpaRepository.findByUserId(userId)
+                .map(UserEntity::toDomain);
     }
 }

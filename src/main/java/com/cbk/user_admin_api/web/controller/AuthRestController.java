@@ -1,6 +1,6 @@
 package com.cbk.user_admin_api.web.controller;
 
-import com.cbk.user_admin_api.application.service.UserSignupService;
+import com.cbk.user_admin_api.application.service.UserCommandService;
 import com.cbk.user_admin_api.web.request.UserSignupRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Tag(name = "인증 API", description = "인증 관련 API")
 public class AuthRestController {
-    private final UserSignupService userSignupService;
+    private final UserCommandService userCommandService;
 
     @PostMapping("/signup")
     @Operation(summary = "회원가입")
     public void signup(@RequestBody @Valid UserSignupRequest request) {
-        userSignupService.signup(request.toCommand());
+        userCommandService.signup(request.toCommand());
     }
 }

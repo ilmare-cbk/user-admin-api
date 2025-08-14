@@ -2,6 +2,9 @@ package com.cbk.user_admin_api.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,5 +27,51 @@ class UserTest {
         User user2 = User.create("M002", "password123", "홍길동", "90010112345", "01012345678", "서울시 강남구");
 
         assertNotEquals(user1, user2);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"newPass", "12345678", "Password!@#"})
+    @DisplayName("updatePassword: 정상 문자열 입력 시 패스워드가 변경된다")
+    void updatePassword_shouldChangePassword_whenValid(String newPassword) {
+        User user = User.create("user1", "oldPass", "홍길동", "900101-1234567", "01012345678", "서울특별시");
+
+        user.updatePassword(newPassword);
+
+        assertEquals(newPassword, user.getPassword());
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {"   "})
+    @DisplayName("updatePassword: 공백 또는 null 입력 시 패스워드는 변경되지 않는다")
+    void updatePassword_shouldNotChangePassword_whenBlankOrNull(String newPassword) {
+        User user = User.create("user1", "oldPass", "홍길동", "900101-1234567", "01012345678", "서울특별시");
+
+        user.updatePassword(newPassword);
+
+        assertEquals("oldPass", user.getPassword());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"경기도 수원시", "부산광역시 해운대구", "서울 강남구"})
+    @DisplayName("updateAddress: 정상 문자열 입력 시 주소가 변경된다")
+    void updateAddress_shouldChangeAddress_whenValid(String newAddress) {
+        User user = User.create("user1", "oldPass", "홍길동", "900101-1234567", "01012345678", "서울특별시");
+
+        user.updateAddress(newAddress);
+
+        assertEquals(newAddress, user.getAddress());
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {"   "})
+    @DisplayName("updateAddress: 공백 또는 null 입력 시 주소는 변경되지 않는다")
+    void updateAddress_shouldNotChangeAddress_whenBlankOrNull(String newAddress) {
+        User user = User.create("user1", "oldPass", "홍길동", "900101-1234567", "01012345678", "서울특별시");
+
+        user.updateAddress(newAddress);
+
+        assertEquals("서울특별시", user.getAddress());
     }
 }

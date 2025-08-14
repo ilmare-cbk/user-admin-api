@@ -43,4 +43,16 @@ public class UserEntity {
         userEntity.address = user.getAddress();
         return userEntity;
     }
+
+    public User toDomain() {
+        return User.create(userId, password, name, ssn, phoneNumber, address);
+    }
+
+    public void updatePassword(String password) {
+        this.password = password;
+    }
+
+    public void updateAddress(String address) {
+        this.address = address;
+    }
 }

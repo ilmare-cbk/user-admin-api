@@ -2,16 +2,16 @@ package com.cbk.user_admin_api.web.controller;
 
 import com.cbk.user_admin_api.application.query.UserPagination;
 import com.cbk.user_admin_api.application.query.UserPaginationQuery;
+import com.cbk.user_admin_api.application.service.UserCommandService;
 import com.cbk.user_admin_api.application.service.UserQueryService;
+import com.cbk.user_admin_api.web.request.UserUpdateRequest;
 import com.cbk.user_admin_api.web.response.UserPaginationResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +21,7 @@ import java.util.List;
 @Tag(name = "시스템 관리자 API", description = "회원 관리 API")
 public class AdminRestController {
     private final UserQueryService userQueryService;
+    private final UserCommandService userCommandService;
 
     @GetMapping("/users")
     @Operation(summary = "회원 목록 조회")
@@ -37,5 +38,11 @@ public class AdminRestController {
                                                              it.getAddress()))
                         .toList()
         );
+    }
+
+    @PutMapping("/users/{userId}")
+    @Operation(summary = "회원 수정")
+    public void updateUser(@PathVariable String userId, @RequestBody @Valid UserUpdateRequest request) {
+        userCommandService.update(request.toCommand(userId));
     }
 }
