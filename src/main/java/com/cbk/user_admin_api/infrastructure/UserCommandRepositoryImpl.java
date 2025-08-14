@@ -25,4 +25,10 @@ public class UserCommandRepositoryImpl implements UserCommandRepository {
                     u.updateAddress(user.getAddress());
                 });
     }
+
+    @Override
+    public void deleteByUserId(String userId) {
+        userJpaRepository.findByUserId(userId)
+                .ifPresent(userJpaRepository::delete);
+    }
 }

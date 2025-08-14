@@ -4,4 +4,6 @@ public interface UserCommandRepository {
     void create(User user);
 
     void update(User user);
+
+    void deleteByUserId(String userId);
 }

@@ -32,4 +32,8 @@ public class UserCommandService {
             userCommandRepository.update(user);
         }
     }
+
+    public void delete(String userId) {
+        userCommandRepository.deleteByUserId(userId);
+    }
 }

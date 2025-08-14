@@ -45,4 +45,10 @@ public class AdminRestController {
     public void updateUser(@PathVariable String userId, @RequestBody @Valid UserUpdateRequest request) {
         userCommandService.update(request.toCommand(userId));
     }
+
+    @DeleteMapping("/users/{userId}")
+    @Operation(summary = "회원 삭제")
+    public void deleteUser(@PathVariable String userId) {
+        userCommandService.delete(userId);
+    }
 }
