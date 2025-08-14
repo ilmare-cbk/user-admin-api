@@ -1,16 +1,16 @@
-package com.cbk.user_admin_api.member.web.request;
+package com.cbk.user_admin_api.web.request;
 
-import com.cbk.user_admin_api.member.application.command.MemberSignupCommand;
+import com.cbk.user_admin_api.application.command.UserSignupCommand;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 @Schema(name = "회원가입 요청")
 @Getter
-public class MemberSignupRequest {
+public class UserSignupRequest {
     @Schema(description = "계정")
     @NotNull
-    private String memberId;
+    private String userId;
 
     @Schema(description = "암호")
     @NotNull
@@ -32,7 +32,7 @@ public class MemberSignupRequest {
     @NotNull
     private String address;
 
-    public MemberSignupCommand toCommand() {
-        return MemberSignupCommand.of(memberId, password, name, ssn, phoneNumber, address);
+    public UserSignupCommand toCommand() {
+        return UserSignupCommand.of(userId, password, name, ssn, phoneNumber, address);
     }
 }
