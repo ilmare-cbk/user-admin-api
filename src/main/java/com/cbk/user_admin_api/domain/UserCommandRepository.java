@@ -1,5 +1,5 @@
 package com.cbk.user_admin_api.domain;
 
-public interface UserRepository {
+public interface UserCommandRepository {
     void create(User user);
 }
