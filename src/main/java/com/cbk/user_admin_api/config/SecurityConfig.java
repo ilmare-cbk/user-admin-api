@@ -38,7 +38,8 @@ public class SecurityConfig {
                 .securityMatcher("/admin/**")
                 .authorizeHttpRequests(auth -> auth
                         .anyRequest().hasRole("ADMIN"))
-                .httpBasic(Customizer.withDefaults());
+                .httpBasic(Customizer.withDefaults())
+                .userDetailsService(adminDetailManager());
 
         return http.build();
     }
