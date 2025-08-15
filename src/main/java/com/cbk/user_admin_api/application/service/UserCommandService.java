@@ -18,7 +18,7 @@ public class UserCommandService {
     private final UserCommandRepository userCommandRepository;
     private final UserQueryRepository userQueryRepository;
 
-    public void signup(UserSignupCommand command) {
+    public void signup(UserSignupCommand command)  {
         userCommandRepository.create(command.toUser());
     }
 

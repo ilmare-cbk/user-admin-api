@@ -8,11 +8,11 @@ import lombok.Getter;
 @Schema(name = "로그인 요청")
 @Getter
 public class LoginRequest {
-    @Schema(description = "계정")
+    @Schema(description = "계정", example = "user01")
     @NotNull
     private String userId;
 
-    @Schema(description = "암호")
+    @Schema(description = "암호", example = "secret1234")
     @NotNull
     private String password;
 

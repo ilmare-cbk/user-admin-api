@@ -1,5 +1,6 @@
 package com.cbk.user_admin_api.application.service;
 
+import com.cbk.user_admin_api.application.query.UserDetail;
 import com.cbk.user_admin_api.application.query.UserPagination;
 import com.cbk.user_admin_api.application.query.UserPaginationQuery;
 import com.cbk.user_admin_api.domain.UserQueryRepository;
@@ -24,5 +25,15 @@ public class UserQueryService {
                                              it.getPhoneNumber(),
                                              it.getAddress()))
                 .toList();
+    }
+
+    public UserDetail readUser(String userId) {
+        return userQueryRepository.findByUserId(userId)
+                .map(it -> UserDetail.of(it.getUserId(),
+                                         it.getName(),
+                                         it.getSsn(),
+                                         it.getPhoneNumber(),
+                                         it.getAddress()))
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
