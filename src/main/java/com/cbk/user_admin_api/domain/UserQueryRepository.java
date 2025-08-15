@@ -7,4 +7,6 @@ public interface UserQueryRepository {
     List<User> findUsers(int page, int size);
 
     Optional<User> findByUserId(String userId);
+
+    List<User> findAllByAgeGroup(int ageGroup);
 }

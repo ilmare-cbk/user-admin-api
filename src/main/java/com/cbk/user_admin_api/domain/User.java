@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDate;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
@@ -17,6 +19,7 @@ public class User {
     private String password;
     private String name;
     private String ssn;
+    private int ageGroup;
     private String phoneNumber;
     private Address address;
 
@@ -31,6 +34,7 @@ public class User {
         user.password = password;
         user.name = name;
         user.ssn = ssn;
+        user.ageGroup = user.extractAgeGroup(ssn);
         user.phoneNumber = phoneNumber;
         user.address = Address.create(address);
         return user;
@@ -40,6 +44,7 @@ public class User {
                           @NotNull String password,
                           @NotNull String name,
                           @NotNull String ssn,
+                          int ageGroup,
                           @NotNull String phoneNumber,
                           @NotNull Address address) {
         User user = new User();
@@ -47,6 +52,7 @@ public class User {
         user.password = password;
         user.name = name;
         user.ssn = ssn;
+        user.ageGroup = ageGroup;
         user.phoneNumber = phoneNumber;
         user.address = address;
         return user;
@@ -72,5 +78,29 @@ public class User {
 
     public String getTopLevelRegionAddress() {
         return this.address.getTopLevelRegion();
+    }
+
+    private int extractAgeGroup(String ssn) {
+        if (!StringUtils.hasText(ssn)) return 0;
+
+        int yearYY = Integer.parseInt(ssn.substring(0, 2));
+        int currentYear = LocalDate.now().getYear();
+        int currentYY = currentYear % 100;
+
+        int birthYear;
+
+        // 현재 연도보다 작은 YY면 2000년대, 크면 1900년대로 판단
+        if (yearYY <= currentYY) {
+            birthYear = 2000 + yearYY;
+        } else {
+            birthYear = 1900 + yearYY;
+        }
+
+        int age = currentYear - birthYear;
+
+        if (age < 0) return 0;
+        if (age >= 100) return 100;
+
+        return (age / 10) * 10;
     }
 }

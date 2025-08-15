@@ -29,4 +29,12 @@ public class UserQueryRepositoryImpl implements UserQueryRepository {
         return userJpaRepository.findByUserId(userId)
                 .map(UserEntity::toDomain);
     }
+
+    @Override
+    public List<User> findAllByAgeGroup(int ageGroup) {
+        return userJpaRepository.findByAgeGroup(ageGroup)
+                .stream()
+                .map(UserEntity::toDomain)
+                .toList();
+    }
 }

@@ -112,4 +112,52 @@ class UserTest {
         // then
         assertThat(result).isFalse();
     }
+
+    @Test
+    @DisplayName("2000년대 생(2005년) -> 20대")
+    void testExtractAgeGroup_2000s() {
+        String ssn = "050101-1234567";
+        User user = User.create(
+                "user1",
+                "password",
+                "홍길동",
+                ssn,
+                "010-1234-5678",
+                "서울특별시"
+        );
+
+        assertEquals(20, user.getAgeGroup());
+    }
+
+    @Test
+    @DisplayName("1990년대 생(1995년) -> 30대")
+    void testExtractAgeGroup_1990s() {
+        String ssn = "950101-1234567";
+        User user = User.create(
+                "user2",
+                "password",
+                "김철수",
+                ssn,
+                "010-9876-5432",
+                "부산광역시"
+        );
+
+        assertEquals(30, user.getAgeGroup());
+    }
+
+    @Test
+    @DisplayName("2020년생 -> 0~9세")
+    void testExtractAgeGroup_0to9() {
+        String ssn = "200101-1234567";
+        User user = User.create(
+                "user3",
+                "password",
+                "이영희",
+                ssn,
+                "010-1111-2222",
+                "대구광역시"
+        );
+
+        assertEquals(0, user.getAgeGroup());
+    }
 }
