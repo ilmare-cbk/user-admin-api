@@ -1,5 +1,6 @@
 package com.cbk.user_admin_api.infrastructure;
 
+import com.cbk.user_admin_api.domain.Address;
 import com.cbk.user_admin_api.domain.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -30,8 +31,8 @@ public class UserEntity {
     @Column(nullable = false)
     private String phoneNumber;
 
-    @Column(nullable = false)
-    private String address;
+    private String topLevelRegionAddress;
+    private String remainderAddress;
 
     public static UserEntity from(User user) {
         UserEntity userEntity = new UserEntity();
@@ -40,19 +41,24 @@ public class UserEntity {
         userEntity.name = user.getName();
         userEntity.ssn = user.getSsn();
         userEntity.phoneNumber = user.getPhoneNumber();
-        userEntity.address = user.getAddress();
+
+        Address address = user.getAddress();
+        userEntity.topLevelRegionAddress = address.getTopLevelRegion();
+        userEntity.remainderAddress = address.getRemainder();
+
         return userEntity;
     }
 
     public User toDomain() {
-        return User.create(userId, password, name, ssn, phoneNumber, address);
+        return User.of(userId, password, name, ssn, phoneNumber, Address.of(topLevelRegionAddress, remainderAddress));
     }
 
     public void updatePassword(String password) {
         this.password = password;
     }
 
-    public void updateAddress(String address) {
-        this.address = address;
+    public void updateAddress(Address address) {
+        this.topLevelRegionAddress = address.getTopLevelRegion();
+        this.remainderAddress = address.getRemainder();
     }
 }

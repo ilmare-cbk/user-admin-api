@@ -23,7 +23,7 @@ public class UserQueryService {
                                              it.getName(),
                                              it.getSsn(),
                                              it.getPhoneNumber(),
-                                             it.getAddress()))
+                                             it.getFullAddress()))
                 .toList();
     }
 
@@ -33,7 +33,7 @@ public class UserQueryService {
                                          it.getName(),
                                          it.getSsn(),
                                          it.getPhoneNumber(),
-                                         it.getAddress()))
+                                         it.getTopLevelRegionAddress()))
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }

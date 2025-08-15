@@ -18,7 +18,7 @@ public class User {
     private String name;
     private String ssn;
     private String phoneNumber;
-    private String address;
+    private Address address;
 
     public static User create(@NotNull String userId,
                               @NotNull String password,
@@ -26,6 +26,22 @@ public class User {
                               @NotNull String ssn,
                               @NotNull String phoneNumber,
                               @NotNull String address) {
+        User user = new User();
+        user.userId = userId;
+        user.password = password;
+        user.name = name;
+        user.ssn = ssn;
+        user.phoneNumber = phoneNumber;
+        user.address = Address.create(address);
+        return user;
+    }
+
+    public static User of(@NotNull String userId,
+                          @NotNull String password,
+                          @NotNull String name,
+                          @NotNull String ssn,
+                          @NotNull String phoneNumber,
+                          @NotNull Address address) {
         User user = new User();
         user.userId = userId;
         user.password = password;
@@ -42,13 +58,19 @@ public class User {
         }
     }
 
-    public void updateAddress(String address) {
-        if (StringUtils.hasText(address)) {
-            this.address = address;
-        }
+    public void updateAddress(Address address) {
+        this.address = address;
     }
 
     public boolean matchedPassword(String password) {
         return this.password.equals(password);
+    }
+
+    public String getFullAddress() {
+        return this.address.getFullAddress();
+    }
+
+    public String getTopLevelRegionAddress() {
+        return this.address.getTopLevelRegion();
     }
 }

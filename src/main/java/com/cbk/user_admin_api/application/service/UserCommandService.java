@@ -2,6 +2,7 @@ package com.cbk.user_admin_api.application.service;
 
 import com.cbk.user_admin_api.application.command.UserSignupCommand;
 import com.cbk.user_admin_api.application.command.UserUpdateCommand;
+import com.cbk.user_admin_api.domain.Address;
 import com.cbk.user_admin_api.domain.User;
 import com.cbk.user_admin_api.domain.UserCommandRepository;
 import com.cbk.user_admin_api.domain.UserQueryRepository;
@@ -28,7 +29,7 @@ public class UserCommandService {
         if (userOpt.isPresent()) {
             User user = userOpt.get();
             user.updatePassword(command.getPassword());
-            user.updateAddress(command.getAddress());
+            user.updateAddress(Address.create(command.getAddress()));
             userCommandRepository.update(user);
         }
     }

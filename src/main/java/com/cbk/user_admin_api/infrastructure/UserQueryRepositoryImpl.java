@@ -20,12 +20,7 @@ public class UserQueryRepositoryImpl implements UserQueryRepository {
     public List<User> findUsers(int page, int size) {
         return userJpaRepository.findAll(PageRequest.of(page, size))
                 .stream()
-                .map(it -> User.create(it.getUserId(),
-                                       it.getPassword(),
-                                       it.getName(),
-                                       it.getSsn(),
-                                       it.getPhoneNumber(),
-                                       it.getAddress()))
+                .map(UserEntity::toDomain)
                 .toList();
     }
 

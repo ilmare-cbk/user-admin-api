@@ -53,29 +53,6 @@ class UserTest {
         assertEquals("oldPass", user.getPassword());
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"경기도 수원시", "부산광역시 해운대구", "서울 강남구"})
-    @DisplayName("updateAddress: 정상 문자열 입력 시 주소가 변경된다")
-    void updateAddress_shouldChangeAddress_whenValid(String newAddress) {
-        User user = User.create("user1", "oldPass", "홍길동", "900101-1234567", "01012345678", "서울특별시");
-
-        user.updateAddress(newAddress);
-
-        assertEquals(newAddress, user.getAddress());
-    }
-
-    @ParameterizedTest
-    @NullAndEmptySource
-    @ValueSource(strings = {"   "})
-    @DisplayName("updateAddress: 공백 또는 null 입력 시 주소는 변경되지 않는다")
-    void updateAddress_shouldNotChangeAddress_whenBlankOrNull(String newAddress) {
-        User user = User.create("user1", "oldPass", "홍길동", "900101-1234567", "01012345678", "서울특별시");
-
-        user.updateAddress(newAddress);
-
-        assertEquals("서울특별시", user.getAddress());
-    }
-
     @Test
     @DisplayName("비밀번호가 일치하면 true를 반환한다")
     void matchedPassword_True_WhenPasswordMatches() {
