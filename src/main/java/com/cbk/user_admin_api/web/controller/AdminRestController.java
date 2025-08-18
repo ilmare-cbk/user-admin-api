@@ -2,10 +2,10 @@ package com.cbk.user_admin_api.web.controller;
 
 import com.cbk.user_admin_api.application.query.UserPagination;
 import com.cbk.user_admin_api.application.query.UserPaginationQuery;
-import com.cbk.user_admin_api.application.service.MessageSendService;
+import com.cbk.user_admin_api.application.service.MessagePublishService;
 import com.cbk.user_admin_api.application.service.UserCommandService;
 import com.cbk.user_admin_api.application.service.UserQueryService;
-import com.cbk.user_admin_api.web.request.MessageSendRequest;
+import com.cbk.user_admin_api.web.request.MessagePublishRequest;
 import com.cbk.user_admin_api.web.request.UserUpdateRequest;
 import com.cbk.user_admin_api.web.response.UserPaginationResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +24,7 @@ import java.util.List;
 public class AdminRestController {
     private final UserQueryService userQueryService;
     private final UserCommandService userCommandService;
-    private final MessageSendService messageSendService;
+    private final MessagePublishService messagePublishService;
 
     @GetMapping("/users")
     @Operation(summary = "회원 목록 조회")
@@ -57,7 +57,7 @@ public class AdminRestController {
 
     @PostMapping("/messages")
     @Operation(summary = "연령별 메세지 전송")
-    public void sendMessages(@RequestBody MessageSendRequest request) {
-        messageSendService.enqueueMessages(request.getAgeGroup());
+    public void publishMessage(@RequestBody MessagePublishRequest request) {
+        messagePublishService.publishMessage(request.getAgeGroup());
     }
 }

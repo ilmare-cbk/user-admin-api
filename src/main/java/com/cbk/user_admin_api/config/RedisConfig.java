@@ -35,8 +35,8 @@ public class RedisConfig {
 
     @Bean(destroyMethod = "close")
     public StatefulRedisConnection<String, byte[]> statefulRedisConnection(
-            @Value("${spring.redis.host}") String host,
-            @Value("${spring.redis.port}") int port) {
+            @Value("${spring.data.redis.host}") String host,
+            @Value("${spring.data.redis.port}") int port) {
 
         RedisClient client = RedisClient.create("redis://" + host + ":" + port);
         return client.connect(RedisCodec.of(StringCodec.UTF8, ByteArrayCodec.INSTANCE));

@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: user-admin-api
+  datasource:
+    url: jdbc:mysql://localhost:3306/useradmin?useSSL=false&serverTimezone=UTC
+    username: root
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+kafka:
+  topics:
+    kakao-message: kakao-message
+    kakao-message-retry: kakao-message-retry
+    sms: sms
+  consumer-groups:
+    kakao-message: kakao-message-consumer-group
+    kakao-message-retry: kakao-message-retry-consumer-group
+    sms: sms-consumer-group
+
+admin:
+  kakao:
+    message:
+      url: http://localhost:8081/kakaotalk-messages
+      id: autoever
+      password: 1234
+  sms:
+    message:
+      url: http://localhost:8082/sms
+      id: autoever
+      password: 5678
+
+server:
+  port: 8080

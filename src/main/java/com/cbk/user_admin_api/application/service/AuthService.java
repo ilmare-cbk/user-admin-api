@@ -3,7 +3,6 @@ package com.cbk.user_admin_api.application.service;
 import com.cbk.user_admin_api.application.command.LoginCommand;
 import com.cbk.user_admin_api.domain.User;
 import com.cbk.user_admin_api.domain.UserQueryRepository;
-import com.cbk.user_admin_api.infrastructure.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
     private final UserQueryRepository userQueryRepository;
-    private final JwtTokenProvider jwtTokenProvider;
+    private final TokenProvider tokenProvider;
 
     public String login(LoginCommand command) {
         User user = userQueryRepository.findByUserId(command.getUserId())
@@ -21,6 +20,6 @@ public class AuthService {
             throw new RuntimeException("Invalid password");
         }
 
-        return jwtTokenProvider.createToken(command.getUserId());
+        return tokenProvider.createToken(command.getUserId());
     }
 }
