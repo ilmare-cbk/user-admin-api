@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -30,6 +31,13 @@ public class Address {
                 .orElse("");
         addr.remainder = address.replaceFirst(addr.topLevelRegion, "").trim();
         return addr;
+    }
+
+    public static Optional<Address> nullable(String address) {
+        if (StringUtils.hasText(address)) {
+            return Optional.of(create(address));
+        }
+        return Optional.empty();
     }
 
     public String getFullAddress() {

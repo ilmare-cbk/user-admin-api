@@ -29,7 +29,7 @@ public class UserCommandService {
         if (userOpt.isPresent()) {
             User user = userOpt.get();
             user.updatePassword(command.getPassword());
-            user.updateAddress(Address.create(command.getAddress()));
+            Address.nullable(command.getAddress()).ifPresent(user::updateAddress);
             userCommandRepository.update(user);
         }
     }
