@@ -1,4 +1,4 @@
-package com.cbk.user_admin_api.infrastructure;
+package com.cbk.user_admin_api.infrastructure.persistence;
 
 import com.cbk.user_admin_api.domain.User;
 import com.cbk.user_admin_api.domain.UserQueryRepository;

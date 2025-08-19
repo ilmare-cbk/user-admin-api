@@ -1,8 +1,8 @@
 package com.cbk.user_admin_api.infrastructure.messaging;
 
-import com.cbk.user_admin_api.infrastructure.MessageFailEntity;
-import com.cbk.user_admin_api.infrastructure.MessageFailJpaRepository;
-import com.cbk.user_admin_api.infrastructure.MessageType;
+import com.cbk.user_admin_api.infrastructure.persistence.MessageFailEntity;
+import com.cbk.user_admin_api.infrastructure.persistence.MessageFailJpaRepository;
+import com.cbk.user_admin_api.infrastructure.persistence.MessageType;
 import com.cbk.user_admin_api.infrastructure.messaging.dto.MessageEventDto;
 import com.cbk.user_admin_api.infrastructure.ratelimit.RateLimiter;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package com.cbk.user_admin_api.config;
+package com.cbk.user_admin_api.infrastructure.ratelimit;
 
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.BucketConfiguration;
