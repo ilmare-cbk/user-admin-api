@@ -18,7 +18,7 @@ public class AuthService {
         User user = userQueryRepository.findByUserId(command.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if (passwordEncoder.encode(command.getPassword()).matches(user.getPassword())) {
+        if (!passwordEncoder.matches(command.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid password");
         }
 
