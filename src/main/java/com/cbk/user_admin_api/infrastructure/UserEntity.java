@@ -46,10 +46,10 @@ public class UserEntity {
     @Column(name = "remainder_address")
     private String remainderAddress;
 
-    public static UserEntity from(User user) {
+    public static UserEntity of(User user, String encryptPassword) {
         UserEntity userEntity = new UserEntity();
         userEntity.userId = user.getUserId();
-        userEntity.password = user.getPassword();
+        userEntity.password = encryptPassword;
         userEntity.name = user.getName();
         userEntity.ssn = user.getSsn();
         userEntity.ageGroup = user.getAgeGroup();
@@ -72,8 +72,8 @@ public class UserEntity {
                        Address.of(topLevelRegionAddress, remainderAddress));
     }
 
-    public void updatePassword(String password) {
-        this.password = password;
+    public void updatePassword(String encryptPassword) {
+        this.password = encryptPassword;
     }
 
     public void updateAddress(Address address) {

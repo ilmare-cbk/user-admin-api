@@ -3,6 +3,7 @@ package com.cbk.user_admin_api.infrastructure;
 import com.cbk.user_admin_api.domain.User;
 import com.cbk.user_admin_api.domain.UserCommandRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,17 +12,18 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserCommandRepositoryImpl implements UserCommandRepository {
     private final UserJpaRepository userJpaRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void create(User user) {
-        userJpaRepository.save(UserEntity.from(user));
+        userJpaRepository.save(UserEntity.of(user, passwordEncoder.encode(user.getPassword())));
     }
 
     @Override
     public void update(User user) {
         userJpaRepository.findByUserId(user.getUserId())
                 .ifPresent(u -> {
-                    u.updatePassword(user.getPassword());
+                    u.updatePassword(passwordEncoder.encode(user.getPassword()));
                     u.updateAddress(user.getAddress());
                 });
     }

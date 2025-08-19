@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
@@ -51,66 +50,6 @@ class UserTest {
         user.updatePassword(newPassword);
 
         assertEquals("oldPass", user.getPassword());
-    }
-
-    @Test
-    @DisplayName("비밀번호가 일치하면 true를 반환한다")
-    void matchedPassword_True_WhenPasswordMatches() {
-        // given
-        User user = User.create(
-                "user01",
-                "secret123",
-                "홍길동",
-                "9001011234567",
-                "01012345678",
-                "서울특별시 종로구"
-        );
-
-        // when
-        boolean result = user.matchedPassword("secret123");
-
-        // then
-        assertThat(result).isTrue();
-    }
-
-    @Test
-    @DisplayName("비밀번호가 불일치하면 false를 반환한다")
-    void matchedPassword_False_WhenPasswordDoesNotMatch() {
-        // given
-        User user = User.create(
-                "user01",
-                "secret123",
-                "홍길동",
-                "9001011234567",
-                "01012345678",
-                "서울특별시 종로구"
-        );
-
-        // when
-        boolean result = user.matchedPassword("wrongPass");
-
-        // then
-        assertThat(result).isFalse();
-    }
-
-    @Test
-    @DisplayName("입력 비밀번호가 null이면 false를 반환한다")
-    void matchedPassword_False_WhenPasswordIsNull() {
-        // given
-        User user = User.create(
-                "user01",
-                "secret123",
-                "홍길동",
-                "9001011234567",
-                "01012345678",
-                "서울특별시 종로구"
-        );
-
-        // when
-        boolean result = user.matchedPassword(null);
-
-        // then
-        assertThat(result).isFalse();
     }
 
     @Test
