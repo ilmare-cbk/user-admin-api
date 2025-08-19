@@ -72,7 +72,7 @@ public class SecurityConfig {
     @Order(3)
     public SecurityFilterChain apiSecurity(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .securityMatcher("/**")
+                .securityMatcher("users/**")
                 .authorizeHttpRequests(auth -> auth
                         .anyRequest().authenticated())
                 .addFilterBefore(new JwtAuthenticationFilter(tokenProvider, userDetailsService), UsernamePasswordAuthenticationFilter.class);

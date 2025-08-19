@@ -9,6 +9,7 @@ import com.cbk.user_admin_api.web.request.MessagePublishRequest;
 import com.cbk.user_admin_api.web.request.UserUpdateRequest;
 import com.cbk.user_admin_api.web.response.UserPaginationResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("admin")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "basicAuth")
 @Tag(name = "시스템 관리자 API", description = "회원 관리 API")
 public class AdminRestController {
     private final UserQueryService userQueryService;
