@@ -1,13 +1,13 @@
 # user-admin-api
 
-서버 실행 전, 터미널에서 `docker-compose.yml`을 실행해주세요.
-
-- user-admin-api 프로젝트 내 docker-compose.yml 파일이 있습니다.
-- docker-compose.yml 실행 전 host의 포트가 이미 사용 중이라면 사용가능한 다른 포트번호로 변경해주세요.
-- docker-compose.yml 파일이 있는 디렉토리에서 아래 명령어를 실행합니다.
-    - docker compose up -d
-- 종료 시에는 아래 명령어를 실행합니다.
-    - docker-compose down
+1. 서버 실행 전, 터미널에서 `docker-compose.yml`을 실행해주세요.
+    - user-admin-api 프로젝트 내 docker-compose.yml 파일이 있습니다.
+    - docker-compose.yml 실행 전 host의 포트가 이미 사용 중이라면 사용가능한 다른 포트번호로 변경해주세요.
+    - docker-compose.yml 파일이 있는 디렉토리에서 아래 명령어를 실행합니다.
+        - docker compose up -d
+    - 종료 시에는 아래 명령어를 실행합니다.
+        - docker-compose down
+2. Java 17 버전을 사용하고 있습니다.
 
 <details>
   <summary>docker-compose.yml 내용 보기</summary>
