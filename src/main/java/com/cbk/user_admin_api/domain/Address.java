@@ -1,5 +1,6 @@
 package com.cbk.user_admin_api.domain;
 
+import com.cbk.user_admin_api.domain.exception.DomainException;
 import lombok.*;
 import org.springframework.util.StringUtils;
 
@@ -21,7 +22,7 @@ public class Address {
 
     public static Address create(String address) {
         if (!StringUtils.hasText(address)) {
-            throw new RuntimeException("Address is empty");
+            throw new DomainException("Address is empty");
         }
 
         Address addr = new Address();

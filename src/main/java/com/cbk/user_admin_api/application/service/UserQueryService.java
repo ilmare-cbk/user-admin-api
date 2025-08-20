@@ -1,5 +1,6 @@
 package com.cbk.user_admin_api.application.service;
 
+import com.cbk.user_admin_api.application.exception.ApplicationException;
 import com.cbk.user_admin_api.application.query.UserDetail;
 import com.cbk.user_admin_api.application.query.UserPagination;
 import com.cbk.user_admin_api.application.query.UserPaginationQuery;
@@ -34,6 +35,6 @@ public class UserQueryService {
                                          it.getSsn(),
                                          it.getPhoneNumber(),
                                          it.getTopLevelRegionAddress()))
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ApplicationException("User not found"));
     }
 }

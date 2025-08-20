@@ -2,6 +2,7 @@ package com.cbk.user_admin_api.application.service;
 
 import com.cbk.user_admin_api.application.command.UserSignupCommand;
 import com.cbk.user_admin_api.application.command.UserUpdateCommand;
+import com.cbk.user_admin_api.application.exception.ApplicationException;
 import com.cbk.user_admin_api.domain.Address;
 import com.cbk.user_admin_api.domain.User;
 import com.cbk.user_admin_api.domain.UserCommandRepository;
@@ -19,7 +20,11 @@ public class UserCommandService {
     private final UserCommandRepository userCommandRepository;
     private final UserQueryRepository userQueryRepository;
 
-    public void signup(UserSignupCommand command)  {
+    public void signup(UserSignupCommand command) {
+        if (userQueryRepository.existsByUserId(command.getUserId()) ||
+                userQueryRepository.existsBySsn(command.getSsn())) {
+            throw new ApplicationException("Account already exists");
+        }
         userCommandRepository.create(command.toUser());
     }
 

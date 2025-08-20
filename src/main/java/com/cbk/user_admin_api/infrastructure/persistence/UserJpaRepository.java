@@ -9,4 +9,8 @@ public interface UserJpaRepository extends JpaRepository<UserEntity, Long> {
     Optional<UserEntity> findByUserId(String userId);
 
     List<UserEntity> findByAgeGroup(int ageGroup);
+
+    boolean existsByUserId(String userId);
+
+    boolean existsBySsn(String ssn);
 }

@@ -9,4 +9,8 @@ public interface UserQueryRepository {
     Optional<User> findByUserId(String userId);
 
     List<User> findAllByAgeGroup(int ageGroup);
+
+    boolean existsByUserId(String userId);
+
+    boolean existsBySsn(String ssn);
 }

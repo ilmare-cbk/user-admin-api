@@ -37,4 +37,14 @@ public class UserQueryRepositoryImpl implements UserQueryRepository {
                 .map(UserEntity::toDomain)
                 .toList();
     }
+
+    @Override
+    public boolean existsByUserId(String userId) {
+        return userJpaRepository.existsByUserId(userId);
+    }
+
+    @Override
+    public boolean existsBySsn(String ssn) {
+        return userJpaRepository.existsBySsn(ssn);
+    }
 }
