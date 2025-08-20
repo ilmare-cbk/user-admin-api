@@ -67,6 +67,10 @@ services:
 
 </details>
 
-API 스팩 확인 및 테스트는 아래 링크에서 확인 가능합니다.
+---
+
+개발 시 사용한 프롬프트는 user-admin-api 프로젝트 내 PROMPT.md에 있습니다.
+
+API 스펙 확인 및 테스트는 아래 링크에서 확인 가능합니다.
 
 - http://localhost:8080/swagger-ui/index.html
