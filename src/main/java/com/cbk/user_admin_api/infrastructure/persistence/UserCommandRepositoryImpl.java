@@ -23,7 +23,9 @@ public class UserCommandRepositoryImpl implements UserCommandRepository {
     public void update(User user) {
         userJpaRepository.findByUserId(user.getUserId())
                 .ifPresent(u -> {
-                    u.updatePassword(passwordEncoder.encode(user.getPassword()));
+                    if (!user.getPassword().equals(u.getPassword())) {
+                        u.updatePassword(passwordEncoder.encode(user.getPassword()));
+                    }
                     u.updateAddress(user.getAddress());
                 });
     }
