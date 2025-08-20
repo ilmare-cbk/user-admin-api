@@ -67,3 +67,6 @@ services:
 
 </details>
 
+API 스팩 확인 및 테스트는 아래 링크에서 확인 가능합니다.
+
+- http://localhost:8080/swagger-ui/index.html
