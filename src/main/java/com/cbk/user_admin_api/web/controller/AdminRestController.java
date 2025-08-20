@@ -60,6 +60,6 @@ public class AdminRestController {
     @PostMapping("/messages")
     @Operation(summary = "연령별 메세지 전송")
     public void publishMessage(@RequestBody MessagePublishRequest request) {
-        messagePublishService.publishMessage(request.getAgeGroup());
+        messagePublishService.publishMessage(request.toCommand());
     }
 }

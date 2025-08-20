@@ -8,6 +8,7 @@ import lombok.Getter;
 public class MessageEventDto {
     private String phone;
     private String name;
+    private String message;
 
     public static MessageEventDto parseMessage(ObjectMapper mapper, String message) {
         MessageEventDto event;

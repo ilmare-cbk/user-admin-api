@@ -66,7 +66,7 @@ public class SmsSendService implements MessageSendService {
                              .toUriString())
                 .header("Authorization", "Basic " + encodedAuth)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .body(BodyInserters.fromFormData("message", String.format(MESSAGE, event.getName())))
+                .body(BodyInserters.fromFormData("message", toMessage(event)))
                 .retrieve()
                 .toBodilessEntity()
                 .doOnSuccess(res -> log.info("sms 메세지 발송 성공: {}", res.getStatusCode()))
@@ -75,9 +75,12 @@ public class SmsSendService implements MessageSendService {
     }
 
     private void saveFailMessage(MessageEventDto event) {
-        messageFailJpaRepository.save(
-                MessageFailEntity.create(MessageType.SMS,
-                                         Map.of("phone", event.getPhone(), "message", String.format(MESSAGE, event.getName())).toString())
-        );
+        messageFailJpaRepository.save(MessageFailEntity.create(MessageType.SMS,
+                                                               Map.of("phone", event.getPhone(),
+                                                                      "message", toMessage(event)).toString()));
+    }
+
+    private String toMessage(MessageEventDto event) {
+        return String.format(MESSAGE, event.getName()) + System.lineSeparator() + event.getMessage();
     }
 }

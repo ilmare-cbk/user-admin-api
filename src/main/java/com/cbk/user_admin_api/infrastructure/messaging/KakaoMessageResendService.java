@@ -57,7 +57,8 @@ public class KakaoMessageResendService implements MessageSendService {
         String auth = kakaoId + ":" + kakaoPassword;
         String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes());
 
-        Map<String, String> requestBody = Map.of("phone", event.getPhone(), "message", String.format(MESSAGE, event.getName()));
+        Map<String, String> requestBody = Map.of("phone", event.getPhone(),
+                                                 "message", String.format(MESSAGE, event.getName()) + System.lineSeparator() + event.getMessage());
         webClient.post()
                 .uri(kakaoMessageUrl)
                 .header("Authorization", "Basic " + encodedAuth)

@@ -5,7 +5,8 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor(staticName = "of")
-public class PhoneNumber {
+public class Message {
     private String name;
     private String phone;
+    private String message;
 }

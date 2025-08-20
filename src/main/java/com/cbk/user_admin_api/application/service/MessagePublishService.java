@@ -1,6 +1,7 @@
 package com.cbk.user_admin_api.application.service;
 
-import com.cbk.user_admin_api.application.query.PhoneNumber;
+import com.cbk.user_admin_api.application.command.MessageCommand;
+import com.cbk.user_admin_api.application.query.Message;
 import com.cbk.user_admin_api.domain.UserQueryRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,12 +21,12 @@ public class MessagePublishService {
     private final ObjectMapper objectMapper;
     private final MessageEventProduceService messageEventProduceService;
 
-    public void publishMessage(int ageGroup) {
-        List<String> messageEvents = userQueryRepository.findAllByAgeGroup(ageGroup)
+    public void publishMessage(MessageCommand command) {
+        List<String> messageEvents = userQueryRepository.findAllByAgeGroup(command.getAgeGroup())
                 .stream()
                 .map(it -> {
                     try {
-                        return objectMapper.writeValueAsString(PhoneNumber.of(it.getName(), it.getPhoneNumber()));
+                        return objectMapper.writeValueAsString(Message.of(it.getName(), it.getPhoneNumber(), command.getMessage()));
                     } catch (JsonProcessingException e) {
                         throw new RuntimeException(e);
                     }
